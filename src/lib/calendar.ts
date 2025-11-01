@@ -1,0 +1,1 @@
+type Hold={id:string;start:string;end:string;title:string}; const holds:Hold[]=[]; export function createHold(start:string,end:string,title:string){const id=Math.random().toString(36).slice(2); holds.push({id,start,end,title}); return {id};} export function listHolds(){return holds;}

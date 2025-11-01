@@ -1,0 +1,1 @@
+export const SITE={name:'PureSpace Cleaning Co.',phone:'360-523-0312',telHref:'tel:13605230312',url:'https://www.purespace-cleaning.co',description:'Luxury janitorial & specialty cleaning for offices, retail, STR, and construction across Washington. Custom quotes only—no public pricing.'};

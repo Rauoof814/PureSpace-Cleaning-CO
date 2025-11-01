@@ -1,0 +1,1 @@
+import faqs from '@/content/faqs.json'; export function FAQ(){ return (<div className='space-y-4'>{(faqs as any).map((f:any,i:number)=>(<details key={i} className='card group'><summary className='cursor-pointer font-medium'>{f.q}</summary><p className='mt-2 opacity-80'>{f.a}</p></details>))}</div>); }

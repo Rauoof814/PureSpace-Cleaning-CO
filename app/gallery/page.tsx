@@ -1,0 +1,1 @@
+export default function Gallery(){return <div className='container py-10'><h1 className='text-3xl font-semibold'>Gallery</h1><p className='opacity-80 mt-2'>Before/after case studies coming online—drop your media into /public and reference here.</p></div>}

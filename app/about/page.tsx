@@ -1,0 +1,1 @@
+export default function About(){return <div className='container py-10'><h1 className='text-3xl font-semibold'>About PureSpace</h1><p className='mt-3 opacity-80'>We deliver executive‑grade janitorial with audited checklists, safety protocols, and quiet, on‑time crews. Licensed, certified, and insured across Washington.</p></div>}

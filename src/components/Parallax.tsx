@@ -1,0 +1,1 @@
+'use client'; import { motion,useScroll,useTransform } from 'framer-motion'; export function Parallax({children}:{children:React.ReactNode}){ const {scrollY}=useScroll(); const y=useTransform(scrollY,[0,600],[0,-120]); return <motion.div style={{y}} className='relative'>{children}</motion.div>; }

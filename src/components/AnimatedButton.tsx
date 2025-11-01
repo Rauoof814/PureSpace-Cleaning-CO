@@ -1,0 +1,1 @@
+'use client'; import { motion } from 'framer-motion'; import { cn } from '@/components/cn'; export function AnimatedButton({children,className='',...rest}:any){return <motion.button whileHover={{y:-2,boxShadow:'0 8px 24px rgba(200,162,74,0.35)'}} whileTap={{scale:0.98}} className={cn('btn btn-primary',className)} {...rest}>{children}</motion.button>;}

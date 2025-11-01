@@ -1,0 +1,1 @@
+import { FAQ } from '@/components/FAQ'; export default function Page(){return <div className='container py-10'><h1 className='text-3xl font-semibold'>FAQs</h1><FAQ/></div>}

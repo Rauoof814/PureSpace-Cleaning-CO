@@ -1,0 +1,205 @@
+{
+  "office-janitorial": {
+    "title": "Office Janitorial (Daily/Weekly)",
+    "slug": "office-janitorial",
+    "intro": "Discreet, reliable day/night crews. QA checklists, keyed access protocols, supply reporting.",
+    "inclusions": [
+      "Restroom sanitation & restock",
+      "Trash & recycling",
+      "Touchpoint disinfection",
+      "Lobby & glass care",
+      "Floors (sweep/mop/vacuum)",
+      "Breakroom/kitchen reset"
+    ],
+    "addons": [
+      "Day porter",
+      "Supply procurement",
+      "Interior/exterior windows",
+      "Carpet extraction",
+      "VCT strip & wax",
+      "Pressure washing"
+    ],
+    "industries": [
+      "Corporate Offices",
+      "Tech",
+      "Government"
+    ]
+  },
+  "day-porter": {
+    "title": "Day Porter",
+    "slug": "day-porter",
+    "intro": "On-site appearance management during business hours.",
+    "inclusions": [
+      "Lobby upkeep",
+      "Restroom refresh",
+      "Spill response",
+      "Meeting room resets"
+    ],
+    "addons": [
+      "Event coverage",
+      "Retail floor support"
+    ],
+    "industries": [
+      "Office",
+      "Retail",
+      "Venues"
+    ]
+  },
+  "medical-dental": {
+    "title": "Medical & Dental (Non\u2011Clinical)",
+    "slug": "medical-dental",
+    "intro": "Non-clinical custodial with HIPAA-aware protocols. Front desk, waiting areas, staff spaces.",
+    "inclusions": [
+      "Restroom & touchpoint sanitation",
+      "Glass & fixtures",
+      "Floors & dusting"
+    ],
+    "addons": [
+      "Terminal-type disinfection for non\u2011clinical areas"
+    ],
+    "industries": [
+      "Medical",
+      "Dental"
+    ]
+  },
+  "retail-showroom": {
+    "title": "Retail & Showroom",
+    "slug": "retail-showroom",
+    "intro": "Merch-first cleaning that protects finishes and lighting aesthetics.",
+    "inclusions": [
+      "Glass & mirror detail",
+      "POS area sanitation",
+      "Back-of-house reset"
+    ],
+    "addons": [
+      "Opening/closing porter",
+      "Window washing"
+    ]
+  },
+  "schools-gyms": {
+    "title": "Schools, Gyms & Studios",
+    "slug": "schools-gyms",
+    "intro": "Sweat-prone environments with disinfection schedules and slip-resistance attention.",
+    "inclusions": [
+      "Locker/restroom sanitation",
+      "Mats & floors",
+      "Equipment wipe downs"
+    ],
+    "addons": [
+      "Odor neutralization",
+      "After-hours porter"
+    ]
+  },
+  "post-construction": {
+    "title": "Post\u2011Construction / TI",
+    "slug": "post-construction",
+    "intro": "Rough & final clean with HEPA filtration, sticker/glue removal, punch\u2011list detail.",
+    "inclusions": [
+      "Debris sweep & bag",
+      "HEPA dusting",
+      "Sticker/glue removal",
+      "Fixture & glass detail"
+    ],
+    "addons": [
+      "Exterior window package",
+      "Pressure washing",
+      "Floor finish care"
+    ]
+  },
+  "airbnb-str": {
+    "title": "Airbnb / STR Turnovers",
+    "slug": "airbnb-str",
+    "intro": "Photo-verified turnovers with linen management, restocks, inventory reporting.",
+    "inclusions": [
+      "Hotel-style reset",
+      "Beds & linens",
+      "Kitchen reset",
+      "Trash & laundry staging"
+    ],
+    "addons": [
+      "Welcome baskets",
+      "Damage photo report"
+    ]
+  },
+  "windows": {
+    "title": "Windows (Interior/Exterior)",
+    "slug": "windows",
+    "intro": "Crystal-clear glazing for storefronts, high-traffic entries and executive spaces.",
+    "inclusions": [
+      "Interior glass & partitions",
+      "Spot-free exterior (height within safety limits)"
+    ],
+    "addons": [
+      "High-reach partners",
+      "Tint-safe methods"
+    ]
+  },
+  "floor-care": {
+    "title": "Floor Care (VCT / LVT / Concrete)",
+    "slug": "floor-care",
+    "intro": "Strip & wax, scrub & recoat, burnish, and concrete polishing programs.",
+    "inclusions": [
+      "Finish assessment",
+      "Machine work",
+      "Edges & corners"
+    ],
+    "addons": [
+      "Scheduled maintenance plans",
+      "Slip resistance testing"
+    ]
+  },
+  "carpet-extraction": {
+    "title": "Carpet Extraction",
+    "slug": "carpet-extraction",
+    "intro": "Low-moisture and HWE programs to extend carpet life and appearance.",
+    "inclusions": [
+      "Pre\u2011treat & agitation",
+      "Hot water extraction",
+      "Rapid dry aids"
+    ],
+    "addons": [
+      "Protectant",
+      "Spot treatment plan"
+    ]
+  },
+  "pressure-washing": {
+    "title": "Pressure Washing",
+    "slug": "pressure-washing",
+    "intro": "Entryways, sidewalks, patios, garage bays\u2014keep first impressions perfect.",
+    "inclusions": [
+      "Degrease & rinse",
+      "Gum removal"
+    ],
+    "addons": [
+      "Sealing (via partners)"
+    ]
+  },
+  "disinfection": {
+    "title": "High-Touch Disinfection",
+    "slug": "disinfection",
+    "intro": "Scheduled disinfection using EPA List N products for non\u2011porous surfaces.",
+    "inclusions": [
+      "Touchpoints plan",
+      "Product & dwell-time logs"
+    ],
+    "addons": [
+      "Outbreak response"
+    ]
+  },
+  "residential": {
+    "title": "Residential Programs",
+    "slug": "residential",
+    "intro": "Standard/Deep, Move\u2011In/Out, Post\u2011Renovation, Windows, Carpet & Upholstery, Organization.",
+    "inclusions": [
+      "Kitchen/bath detail",
+      "Dusting high/low",
+      "Floors"
+    ],
+    "addons": [
+      "Inside oven/fridge",
+      "Windows in/out",
+      "Carpet extraction",
+      "Garage tidy"
+    ]
+  }
+}

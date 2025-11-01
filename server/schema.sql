@@ -1,0 +1,11 @@
+create extension if not exists "uuid-ossp";
+create table if not exists customers (id uuid primary key default gen_random_uuid(), email text, phone text, name text, created_at timestamptz default now(), notes text);
+create table if not exists leads (id uuid primary key default gen_random_uuid(), customer_id uuid references customers(id), source text, status text default 'new' check (status in ('new','contacted','qualified','quoted','won','lost')), payload jsonb, created_at timestamptz default now(), updated_at timestamptz default now());
+create table if not exists bookings (id uuid primary key default gen_random_uuid(), lead_id uuid references leads(id), start_time timestamptz, end_time timestamptz, address text, crew jsonb, status text default 'hold' check (status in ('hold','confirmed','done','cancelled')), notes text, created_at timestamptz default now());
+alter table customers enable row level security; alter table leads enable row level security; alter table bookings enable row level security;
+create policy if not exists "anon read customers" on customers for select using (true);
+create policy if not exists "anon insert customers" on customers for insert with check (true);
+create policy if not exists "anon read leads" on leads for select using (true);
+create policy if not exists "anon insert leads" on leads for insert with check (true);
+create policy if not exists "anon read bookings" on bookings for select using (true);
+create policy if not exists "anon insert bookings" on bookings for insert with check (true);

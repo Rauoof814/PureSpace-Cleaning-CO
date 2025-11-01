@@ -1,0 +1,1 @@
+import { bookingSchema } from '@/lib/validators'; test('booking valid',()=>{ expect(bookingSchema.safeParse({service:'Office Janitorial',propertyType:'office',date:'2025-11-01',time:'10:00',firstName:'A',lastName:'B',email:'a@b.com',phone:'3605230312',address:'123'}).success).toBe(true); });

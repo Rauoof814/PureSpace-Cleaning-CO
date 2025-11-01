@@ -1,0 +1,1 @@
+import { ServiceGrid } from '@/components/ServiceGrid'; export default function ServicesPage(){return <div className='container'><h1 className='text-3xl font-semibold my-6'>Services</h1><ServiceGrid/></div>}
