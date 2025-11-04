@@ -1,12 +1,13 @@
 'use client';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { SITE } from '@/lib/config';
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -14,24 +15,36 @@ export function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setActiveDropdown(null);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     const servicesItems = [
         { name: 'Commercial Janitorial', href: '/services/commercial-janitorial' },
-        { name: 'Medical Facility Cleaning', href: '/services/medical-facility' },
+        { name: 'Medical Facility Cleaning', href: '/services/medical-facility-cleaning' },
         { name: 'Construction Cleanup', href: '/services/construction-cleanup' },
         { name: 'Carpet & Upholstery', href: '/services/carpet-upholstery' },
-        { name: 'Floor Care', href: '/services/floor-care' },
+        { name: 'Floor Stripping & Waxing', href: '/services/floor-stripping-waxing' },
         { name: 'Window Cleaning', href: '/services/window-cleaning' },
-        { name: 'Emergency Services', href: '/emergency-services' },
-        { name: 'Green Cleaning', href: '/green-cleaning' }
+        { name: 'Pressure Washing', href: '/services/pressure-washing' },
+        { name: 'Junk Removal', href: '/services/junk-removal' }
     ];
 
     const industriesItems = [
-        { name: 'Corporate Offices', href: '/industries/corporate' },
-        { name: 'Healthcare', href: '/industries/healthcare' },
-        { name: 'Education', href: '/industries/education' },
-        { name: 'Retail', href: '/industries/retail' },
-        { name: 'Hospitality', href: '/industries/hospitality' },
-        { name: 'Industrial', href: '/industries/industrial' }
+        { name: 'Corporate Offices', href: '/industries/corporate-offices' },
+        { name: 'Healthcare Facilities', href: '/industries/healthcare-facilities' },
+        { name: 'Educational Institutions', href: '/industries/educational-institutions' },
+        { name: 'Retail Centers', href: '/industries/retail-centers' },
+        { name: 'Hospitality & Hotels', href: '/industries/hospitality-hotels' },
+        { name: 'Industrial Complexes', href: '/industries/industrial-complexes' }
     ];
 
     const companyItems = [
@@ -51,8 +64,9 @@ export function Header() {
                     initial={{ opacity: 0, y: 10, rotateX: -15 }}
                     animate={{ opacity: 1, y: 0, rotateX: 0 }}
                     exit={{ opacity: 0, y: 10, rotateX: -15 }}
-                    className="absolute top-full left-0 mt-4 w-64 glass-dark rounded-2xl shadow-2xl border border-luxury-accent/20 p-4 preserve-3d"
+                    className="absolute top-full left-0 mt-2 w-72 glass-dark rounded-2xl shadow-2xl border border-luxury-accent/20 p-4 preserve-3d z-50"
                     style={{ transformOrigin: 'top center' }}
+                    ref={dropdownRef}
                 >
                     {items.map((item, index) => (
                         <motion.div
@@ -63,10 +77,19 @@ export function Header() {
                         >
                             <Link
                                 href={item.href}
-                                className="block py-3 px-4 text-luxury-silver hover:text-luxury-accent transition-all duration-300 rounded-xl hover:bg-luxury-card/50"
-                                onMouseEnter={() => setActiveDropdown(title)}
+                                className="block py-3 px-4 text-luxury-silver hover:text-luxury-accent transition-all duration-300 rounded-xl hover:bg-luxury-card/50 group"
+                                onClick={() => setActiveDropdown(null)}
                             >
-                                {item.name}
+                                <span className="flex items-center justify-between">
+                                    {item.name}
+                                    <motion.span
+                                        className="opacity-0 group-hover:opacity-100"
+                                        initial={{ x: -10 }}
+                                        whileHover={{ x: 0 }}
+                                    >
+                                        →
+                                    </motion.span>
+                                </span>
                             </Link>
                         </motion.div>
                     ))}
@@ -122,12 +145,12 @@ export function Header() {
                             key={section.title}
                             className="relative preserve-3d"
                             onMouseEnter={() => setActiveDropdown(section.title)}
-                            onMouseLeave={() => setActiveDropdown(null)}
+                            onMouseLeave={() => setTimeout(() => setActiveDropdown(null), 200)}
                         >
-                            <button className="nav-item-3d text-luxury-silver hover:text-luxury-accent font-medium transition-colors duration-300 py-2 px-4">
+                            <button className="nav-item-3d text-luxury-silver hover:text-luxury-accent font-medium transition-colors duration-300 py-2 px-4 flex items-center gap-1">
                                 {section.title}
                                 <motion.span
-                                    className="ml-1 inline-block"
+                                    className="inline-block"
                                     animate={{ rotate: activeDropdown === section.title ? 180 : 0 }}
                                 >
                                     ▼
