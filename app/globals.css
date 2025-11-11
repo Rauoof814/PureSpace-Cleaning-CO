@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    /* Luxury Dark Color Palette */
+    /* Enhanced Luxury Color Palette */
     --luxury-dark: #0a0f1c;
     --luxury-darker: #050913;
     --luxury-card: #1a2238;
@@ -13,10 +13,11 @@
     --luxury-gold: #d4af37;
     --luxury-silver: #e2e8f0;
     --luxury-emerald: #10b981;
+    --luxury-crystal: rgba(255, 255, 255, 0.1);
 
     /* 3D Effect Variables */
-    --perspective: 1000px;
-    --depth: 50px;
+    --perspective: 1200px;
+    --depth: 60px;
 }
 
 * {
@@ -32,25 +33,28 @@ body {
     @apply bg-luxury-dark text-luxury-silver antialiased overflow-x-hidden;
     font-family: 'Inter', sans-serif;
     transform-style: preserve-3d;
+    background: linear-gradient(135deg, var(--luxury-dark) 0%, var(--luxury-darker) 100%);
 }
 
-/* Luxury Scrollbar */
+/* Enhanced Luxury Scrollbar */
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 14px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--luxury-darker);
+    background: linear-gradient(180deg, var(--luxury-darker), var(--luxury-dark));
 }
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-accent));
-    border-radius: 6px;
-    border: 2px solid var(--luxury-darker);
+    border-radius: 8px;
+    border: 3px solid var(--luxury-darker);
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, var(--luxury-accent), var(--luxury-gold));
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.5);
 }
 
 /* Container */
@@ -58,14 +62,25 @@ body {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
-/* 3D Button System */
+/* Premium 3D Button System */
 .btn {
-    @apply inline-flex items-center justify-center rounded-2xl px-8 py-4 font-semibold shadow-2xl transition-all duration-500 relative overflow-hidden;
+    @apply inline-flex items-center justify-center rounded-2xl px-6 py-3 sm:px-8 sm:py-4 font-semibold shadow-2xl transition-all duration-500 relative overflow-hidden;
     transform-style: preserve-3d;
     background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-emerald));
     color: white;
     border: none;
     transform: translateZ(20px);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 640px) {
+    .btn {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
 }
 
 .btn::before {
@@ -76,7 +91,7 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.6s;
+    transition: left 0.7s ease-in-out;
 }
 
 .btn:hover::before {
@@ -85,60 +100,118 @@ body {
 
 .btn:hover {
     transform: translateZ(30px) scale(1.05);
-    box-shadow: 0 25px 50px -12px rgba(45, 212, 191, 0.25);
+    box-shadow:
+        0 25px 50px -12px rgba(45, 212, 191, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary {
     background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-emerald));
+    position: relative;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--luxury-emerald), var(--luxury-gold));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+}
+
+.btn-primary:hover::after {
+    opacity: 1;
 }
 
 .btn-outline {
     background: transparent;
     border: 2px solid var(--luxury-gold);
     color: var(--luxury-gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-outline::before {
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
 }
 
 .btn-outline:hover {
     background: var(--luxury-gold);
     color: var(--luxury-dark);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
 }
 
-/* 3D Card System */
+/* Premium 3D Card System */
 .card {
-    @apply rounded-3xl border-0 p-8 shadow-2xl backdrop-blur-xl;
+    @apply rounded-3xl border-0 p-6 sm:p-8 shadow-2xl backdrop-blur-xl;
     background: linear-gradient(145deg, var(--luxury-card), var(--luxury-darker));
-    border: 1px solid rgba(45, 212, 191, 0.1);
+    border: 1px solid rgba(45, 212, 191, 0.15);
     transform-style: preserve-3d;
     transform: translateZ(0);
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--luxury-accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .card:hover {
-    transform: translateZ(20px) rotateX(5deg) rotateY(5deg);
+    transform: translateZ(25px) rotateX(5deg) rotateY(5deg);
     box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(45, 212, 191, 0.1),
-        0 0 50px rgba(45, 212, 191, 0.1);
+        0 35px 60px -12px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(45, 212, 191, 0.2),
+        0 0 80px rgba(45, 212, 191, 0.15);
 }
 
-/* Luxury Typography */
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Enhanced Luxury Typography */
 .luxury-heading {
     font-family: 'Playfair Display', serif;
     @apply font-bold leading-tight;
-    background: linear-gradient(135deg, var(--luxury-silver), var(--luxury-accent));
+    background: linear-gradient(135deg, var(--luxury-silver) 0%, var(--luxury-accent) 50%, var(--luxury-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 4px 20px rgba(45, 212, 191, 0.3);
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-emerald));
+    background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-emerald), var(--luxury-accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
 }
 
-/* 3D Animations */
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Enhanced 3D Animations */
 @keyframes float3D {
 
     0%,
@@ -147,11 +220,11 @@ body {
     }
 
     33% {
-        transform: translateZ(20px) translateY(-10px) rotateX(5deg) rotateY(5deg);
+        transform: translateZ(30px) translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.02);
     }
 
     66% {
-        transform: translateZ(10px) translateY(-5px) rotateX(-3deg) rotateY(-3deg);
+        transform: translateZ(15px) translateY(-8px) rotateX(-3deg) rotateY(-3deg) scale(1.01);
     }
 }
 
@@ -163,22 +236,39 @@ body {
 
     100% {
         background-position: 1000px 0;
-        transform: translateZ(10px);
+        transform: translateZ(20px);
+    }
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(45, 212, 191, 0.6), 0 0 60px rgba(45, 212, 191, 0.3);
     }
 }
 
 .float-3d {
-    animation: float3D 6s ease-in-out infinite;
+    animation: float3D 8s ease-in-out infinite;
     transform-style: preserve-3d;
 }
 
 .shimmer-3d {
-    background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.4), transparent);
-    animation: shimmer3D 3s infinite;
+    background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.6), transparent);
+    background-size: 200% 100%;
+    animation: shimmer3D 2.5s infinite;
     transform-style: preserve-3d;
 }
 
-/* Particle System */
+.glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Enhanced Particle System */
 .particle-3d {
     position: absolute;
     background: var(--luxury-accent);
@@ -186,33 +276,40 @@ body {
     opacity: 0.6;
     transform-style: preserve-3d;
     animation: float3D 8s infinite linear;
+    box-shadow: 0 0 20px currentColor;
 }
 
-/* Section Styling */
+/* Premium Section Styling */
 section {
-    @apply py-20 md:py-28 lg:py-32;
+    @apply py-20 md:py-28 lg:py-36;
     transform-style: preserve-3d;
+    position: relative;
 }
 
-/* Input Fields */
+/* Enhanced Input Fields */
 .input-3d {
-    @apply w-full rounded-2xl border-2 bg-luxury-card/50 backdrop-blur-xl px-6 py-4 text-lg focus:outline-none transition-all duration-500;
-    border-color: rgba(45, 212, 191, 0.2);
+    @apply w-full rounded-2xl border-2 bg-luxury-card/30 backdrop-blur-xl px-6 py-4 text-lg focus:outline-none transition-all duration-500;
+    border-color: rgba(45, 212, 191, 0.3);
     color: var(--luxury-silver);
     transform-style: preserve-3d;
     transform: translateZ(0);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .input-3d:focus {
     border-color: var(--luxury-accent);
-    transform: translateZ(10px);
-    box-shadow: 0 20px 40px -10px rgba(45, 212, 191, 0.2);
+    transform: translateZ(15px);
+    box-shadow:
+        0 25px 50px -12px rgba(45, 212, 191, 0.3),
+        0 0 0 1px rgba(45, 212, 191, 0.2);
+    background: rgba(26, 34, 56, 0.5);
 }
 
-/* Navigation */
+/* Enhanced Navigation */
 .nav-item-3d {
     @apply relative overflow-hidden;
     transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .nav-item-3d::before {
@@ -223,28 +320,38 @@ section {
     width: 0;
     height: 2px;
     background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-accent));
-    transition: width 0.3s ease;
-    transform: translateZ(10px);
+    transition: width 0.4s ease;
+    transform: translateZ(15px);
+    box-shadow: 0 0 10px var(--luxury-accent);
 }
 
 .nav-item-3d:hover::before {
     width: 100%;
 }
 
-/* Background Patterns */
+/* Premium Background Patterns */
 .bg-luxury-grid {
     background-image:
-        linear-gradient(rgba(45, 212, 191, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(45, 212, 191, 0.1) 1px, transparent 1px);
+        linear-gradient(rgba(45, 212, 191, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45, 212, 191, 0.15) 1px, transparent 1px);
     background-size: 50px 50px;
+    background-position: center center;
 }
 
 .bg-luxury-dots {
-    background-image: radial-gradient(rgba(45, 212, 191, 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
+    background-image: radial-gradient(rgba(45, 212, 191, 0.2) 1px, transparent 1px);
+    background-size: 25px 25px;
+    background-position: center center;
 }
 
-/* 3D Transform Utilities */
+.bg-luxury-circuit {
+    background-image:
+        linear-gradient(90deg, transparent 99%, rgba(45, 212, 191, 0.1) 99%),
+        linear-gradient(0deg, transparent 99%, rgba(45, 212, 191, 0.1) 99%);
+    background-size: 30px 30px;
+}
+
+/* Enhanced 3D Transform Utilities */
 .preserve-3d {
     transform-style: preserve-3d;
 }
@@ -261,19 +368,200 @@ section {
     transform: translateZ(30px);
 }
 
-.rotate-3d {
-    transform: rotateX(5deg) rotateY(5deg);
+.translate-z-40 {
+    transform: translateZ(40px);
 }
 
-/* Glass Morphism */
+.rotate-3d {
+    transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
+}
+
+/* Premium Glass Morphism */
 .glass {
     background: rgba(26, 34, 56, 0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(45, 212, 191, 0.1);
+    backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(45, 212, 191, 0.15);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .glass-dark {
-    background: rgba(10, 15, 28, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(45, 212, 191, 0.1);
+    background: rgba(10, 15, 28, 0.85);
+    backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Responsive Design */
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 480px) {
+    .container {
+        @apply px-3;
+    }
+
+    /* More compact buttons for very small screens */
+    .btn {
+        @apply px-3 py-2 text-xs;
+        min-height: 40px;
+    }
+
+    /* Ensure hamburger menu is always visible and properly sized */
+    .mobile-menu-button {
+        @apply w-9 h-9 min-w-[36px] min-h-[36px] flex-shrink-0;
+    }
+
+    /* Compact logo for very small screens */
+    .luxury-heading {
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        @apply px-2;
+    }
+
+    /* Ultra-compact for smallest screens */
+    .btn {
+        @apply px-2 py-1.5 text-xs;
+        min-height: 36px;
+    }
+
+    .mobile-menu-button {
+        @apply w-8 h-8 min-w-[32px] min-h-[32px];
+    }
+
+    .luxury-heading {
+        font-size: 0.9rem;
+    }
+}
+
+/* Galaxy S20 Ultra and similar large phones */
+@media (min-width: 412px) and (max-width: 915px) and (orientation: portrait) {
+    .container {
+        @apply px-4;
+    }
+
+    .mobile-menu-button {
+        @apply w-10 h-10;
+    }
+
+    .btn {
+        @apply px-4 py-2.5 text-sm;
+    }
+}
+
+/* iPad and tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        @apply px-6;
+    }
+
+    /* Show hamburger on tablets */
+    .lg\:hidden {
+        display: flex !important;
+    }
+
+    /* Hide desktop nav on tablets */
+    .lg\:flex {
+        display: none !important;
+    }
+}
+
+/* Ensure buttons don't overflow on mobile */
+.btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* Prevent layout shift */
+.mobile-menu-button {
+    flex-shrink: 0;
+    display: flex !important;
+    /* Force display */
+}
+
+/* Enhanced dropdown stability */
+.preserve-3d {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 1024px) {
+
+    .btn,
+    .nav-item-3d,
+    .mobile-menu-button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Force mobile menu button to be visible */
+@media (max-width: 1023px) {
+    .mobile-menu-button {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
+/* Prevent horizontal scroll */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Enhanced glass effect for mobile */
+@media (max-width: 1024px) {
+    .glass-dark {
+        backdrop-filter: blur(20px) saturate(180%);
+    }
+}
+
+/* Specific fix for Galaxy S20 Ultra (412px wide) */
+@media (width: 412px) and (height: 915px) {
+    .container {
+        @apply px-4;
+    }
+
+    .mobile-menu-button {
+        @apply w-10 h-10 ml-2;
+    }
+}
+
+/* Fix for iPhone 12 Pro and similar */
+@media (width: 390px) and (height: 844px) {
+    .container {
+        @apply px-4;
+    }
+
+    .mobile-menu-button {
+        @apply w-10 h-10 ml-2;
+    }
+}
+
+/* Fix for iPhone XR and similar */
+@media (width: 414px) and (height: 896px) {
+    .container {
+        @apply px-4;
+    }
+
+    .mobile-menu-button {
+        @apply w-10 h-10 ml-2;
+    }
 }

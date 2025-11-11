@@ -1,3 +1,4 @@
+
 import './globals.css';
 import type { Metadata } from 'next';
 import { SITE } from '@/lib/config';
@@ -20,12 +21,16 @@ export const metadata: Metadata = {
     }
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
         <html lang="en" className="scroll-smooth">
             <body className="relative">
                 <Header />
-                <main className="relative">
+                <main className="relative pt-16 md:pt-20">
                     {children}
                 </main>
                 <Footer />
