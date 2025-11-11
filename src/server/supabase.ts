@@ -1,12 +1,14 @@
-// src/server/supabase.ts
-'use server';
+import 'server-only';
 import { createClient } from '@supabase/supabase-js';
 
-export async function getSupabaseServiceClient() {
-    const url =
-        process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-    const key =
-        process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '';
-    // returning a value from an async action is fine
-    return createClient(url, key);
-}
+// ✅ Admin client (server only)
+export const supabaseAdmin = createClient(
+    process.env.SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+);
+
+// ✅ Public client (safe for SSR)
+export const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+);
