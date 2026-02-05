@@ -8,18 +8,21 @@ export default function CommercialJanitorial() {
 
     const features = [
         {
+            icon: "🧹",
             title: "Daily Office Cleaning",
             description: "Comprehensive daily cleaning for corporate environments",
             details: ["Trash removal & recycling", "Surface disinfection", "Floor care & vacuuming", "Restroom sanitation"],
             image: "/services/commercial-daily.jpg"
         },
         {
+            icon: "🧼",
             title: "Deep Cleaning Services",
             description: "Periodic intensive cleaning for maintained appearance",
             details: ["Carpet deep cleaning", "Window washing", "High dusting", "Floor stripping & waxing"],
             image: "/services/commercial-deep.jpg"
         },
         {
+            icon: "🧴",
             title: "Specialized Areas",
             description: "Targeted cleaning for specific office areas",
             details: ["Kitchen & break rooms", "Conference rooms", "Executive offices", "Common areas"],
@@ -97,8 +100,8 @@ export default function CommercialJanitorial() {
                                     <motion.div
                                         key={feature.title}
                                         className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 ${activeFeature === index
-                                                ? 'bg-luxury-card border-l-4 border-luxury-gold'
-                                                : 'bg-luxury-dark hover:bg-luxury-card/50'
+                                            ? 'bg-luxury-card border-l-4 border-luxury-gold'
+                                            : 'bg-luxury-dark hover:bg-luxury-card/50'
                                             }`}
                                         onClick={() => setActiveFeature(index)}
                                         whileHover={{ scale: 1.02 }}
