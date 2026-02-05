@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     const hasSupabase =
         !!process.env.SUPABASE_URL && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (hasSupabase) {
+    if (hasSupabase && supabaseAdmin) {
         try {
             const { data: cust, error: custErr } = await supabaseAdmin
                 .from("customers")
