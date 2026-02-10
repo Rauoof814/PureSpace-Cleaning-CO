@@ -1,384 +1,305 @@
 'use client';
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+const PHONE_DISPLAY = '360-523-0312';
+const PHONE_TEL = 'tel:+13605230312';
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 16 },
+    show: (i: number) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay: 0.08 * i } }),
+};
 
 export default function Home() {
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        setIsVisible(true);
-    }, []);
-
-    // 3D Particle Background
-    const Particles3D = () => {
-        const particles = Array.from({ length: 30 }, (_, i) => ({
-            id: i,
-            size: Math.random() * 6 + 2,
-            left: Math.random() * 100,
-            top: Math.random() * 100,
-            delay: Math.random() * 5,
-            duration: Math.random() * 8 + 4
-        }));
-
-        return (
-            <div className="absolute inset-0 overflow-hidden preserve-3d">
-                {particles.map(particle => (
-                    <motion.div
-                        key={particle.id}
-                        className="absolute rounded-full bg-gradient-to-r from-luxury-gold/30 to-luxury-emerald/30 preserve-3d"
-                        style={{
-                            width: particle.size,
-                            height: particle.size,
-                            left: `${particle.left}%`,
-                            top: `${particle.top}%`,
-                        }}
-                        animate={{
-                            y: [0, -100, 0],
-                            x: [0, 20, 0],
-                            opacity: [0, 0.8, 0],
-                            rotateZ: [0, 180, 360],
-                        }}
-                        transition={{
-                            duration: particle.duration,
-                            delay: particle.delay,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                    />
-                ))}
-            </div>
-        );
-    };
-
-    const stats = [
-        { number: "500+", label: "Enterprise Clients", icon: "🏢" },
-        { number: "99.7%", label: "Satisfaction Rate", icon: "⭐" },
-        { number: "24/7", label: "Service Coverage", icon: "🌙" },
-        { number: "15+", label: "Years Experience", icon: "🎯" }
-    ];
-
     const services = [
         {
-            title: "Commercial Janitorial",
-            description: "Daily office cleaning for corporate environments with premium standards",
-            icon: "🏢",
-            features: ["Daily trash removal", "Surface disinfection", "Restroom sanitation"]
+            title: 'Commercial Janitorial',
+            desc: 'Daily and nightly cleaning programs built for offices, multi-tenant buildings, and corporate campuses.',
+            bullets: ['Day porter / night janitorial', 'Restroom + breakroom detail', 'Quality checklists & reporting'],
+            href: '/services/commercial-janitorial',
         },
         {
-            title: "Medical Facility Cleaning",
-            description: "HIPAA compliant healthcare environment cleaning and sanitization",
-            icon: "🏥",
-            features: ["Biohazard disposal", "Sterile surface cleaning", "Infection control"]
+            title: 'Medical Facility Cleaning',
+            desc: 'High-standard sanitation for clinics and medical spaces with consistent protocols.',
+            bullets: ['High-touch disinfection', 'Restroom compliance focus', 'After-hours workflows'],
+            href: '/services/medical-facility-cleaning',
         },
         {
-            title: "Construction Cleanup",
-            description: "Post-construction deep cleaning and debris removal services",
-            icon: "🏗️",
-            features: ["Debris removal", "Final clean preparation", "Window cleaning"]
-        }
+            title: 'Construction Cleanup',
+            desc: 'Post-construction cleaning that makes the space move-in ready and presentable for handoff.',
+            bullets: ['Dust + debris removal', 'Final detail clean', 'Glass + trim finishing'],
+            href: '/services/construction-cleanup',
+        },
+    ];
+
+    const process = [
+        { title: 'Walkthrough', desc: 'We visit your site, understand traffic patterns, and identify high-touch areas.' },
+        { title: 'Proposal', desc: 'You receive a clear scope, schedule, and pricing—no confusion, no fluff.' },
+        { title: 'Launch', desc: 'We deploy a trained team with checklists and quality inspections.' },
+        { title: 'Quality', desc: 'Ongoing audits and updates to keep your facility consistently sharp.' },
     ];
 
     return (
-        <div className="min-h-screen bg-luxury-dark overflow-hidden">
-            {/* Hero Section with 3D Effects */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden preserve-3d">
-                {/* Background Elements */}
-                <div className="absolute inset-0 bg-gradient-to-br from-luxury-dark via-luxury-card to-luxury-darker" />
-                <Particles3D />
+        <div className="min-h-screen">
+            {/* HERO */}
+            <section className="section relative overflow-hidden">
+                {/* subtle background accents */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-luxury-accent/10 blur-3xl" />
+                    <div className="absolute -top-24 -right-48 h-[520px] w-[520px] rounded-full bg-luxury-gold/10 blur-3xl" />
+                    <div className="absolute bottom-0 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-emerald-500/5 blur-3xl" />
+                </div>
 
-                {/* Floating 3D Shapes */}
-                <motion.div
-                    className="absolute top-1/4 left-1/4 w-96 h-96 bg-luxury-gold/10 rounded-full blur-3xl preserve-3d"
-                    animate={{
-                        scale: [1, 1.3, 1],
-                        opacity: [0.3, 0.6, 0.3],
-                        rotateY: [0, 180, 360]
-                    }}
-                    transition={{ duration: 12, repeat: Infinity }}
-                />
-                <motion.div
-                    className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-luxury-emerald/10 rounded-full blur-3xl preserve-3d"
-                    animate={{
-                        scale: [1.2, 1, 1.2],
-                        opacity: [0.4, 0.2, 0.4],
-                        rotateX: [0, 180, 360]
-                    }}
-                    transition={{ duration: 15, repeat: Infinity }}
-                />
-
-                <div className="container relative z-10 text-center preserve-3d">
-                    {/* Main Heading with 3D Text */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 60 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                        className="space-y-8"
-                    >
-                        <motion.h1
-                            className="luxury-heading text-7xl md:text-9xl lg:text-[10rem] font-bold mb-8 preserve-3d"
-                            initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                            animate={isVisible ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
-                            transition={{ duration: 1.5, delay: 0.2 }}
-                            style={{ transformStyle: 'preserve-3d' }}
-                        >
-                            <span className="gradient-text">PureSpace</span>
-                        </motion.h1>
-
-                        <motion.h2
-                            className="text-4xl md:text-6xl lg:text-7xl luxury-heading text-luxury-silver mb-6 preserve-3d"
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                        >
-                            Luxury Commercial Cleaning
-                        </motion.h2>
-
-                        <motion.p
-                            className="text-xl md:text-2xl lg:text-3xl text-luxury-silver/80 max-w-6xl mx-auto leading-relaxed preserve-3d"
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.8, delay: 0.7 }}
-                        >
-                            <span className="font-semibold text-luxury-gold">Enterprise-Grade</span> Cleaning Solutions for{" "}
-                            <span className="font-semibold text-luxury-emerald">Fortune 500 Companies</span>, Healthcare Facilities, and Premium Commercial Spaces Worldwide
-                        </motion.p>
-                    </motion.div>
-
-                    {/* Animated Stats with 3D Cards */}
-                    <motion.div
-                        className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto preserve-3d"
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.8, delay: 1 }}
-                    >
-                        {stats.map((stat, index) => (
+                <div className="container relative">
+                    <div className="grid lg:grid-cols-12 gap-10 items-center">
+                        <div className="lg:col-span-7">
                             <motion.div
-                                key={stat.label}
-                                className="card text-center preserve-3d group cursor-pointer"
-                                initial={{ opacity: 0, scale: 0.8, rotateY: -45 }}
-                                animate={isVisible ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
-                                transition={{ duration: 0.6, delay: 1.2 + index * 0.1 }}
-                                whileHover={{
-                                    scale: 1.05,
-                                    rotateY: 10,
-                                    y: -10
-                                }}
+                                className="kicker w-fit"
+                                initial="hidden"
+                                animate="show"
+                                variants={fadeUp}
+                                custom={0}
                             >
-                                <motion.div
-                                    className="text-3xl mb-3 preserve-3d"
-                                    animate={{ rotateY: [0, 360] }}
-                                    transition={{ duration: 4, repeat: Infinity, delay: index * 0.5 }}
-                                >
-                                    {stat.icon}
-                                </motion.div>
-                                <div className="text-2xl md:text-3xl font-bold text-luxury-gold mb-2 preserve-3d">
-                                    {stat.number}
-                                </div>
-                                <div className="text-sm md:text-base text-luxury-silver/70 preserve-3d">
-                                    {stat.label}
+                                Premium Commercial Cleaning
+                                <span className="badge">Seattle Area</span>
+                            </motion.div>
+
+                            <motion.h1
+                                className="mt-6 text-5xl md:text-6xl lg:text-7xl h-display text-premium"
+                                initial="hidden"
+                                animate="show"
+                                variants={fadeUp}
+                                custom={1}
+                            >
+                                A cleaner facility
+                                <br />
+                                that looks executive.
+                            </motion.h1>
+
+                            <motion.p
+                                className="mt-6 text-base md:text-lg p-lead max-w-2xl"
+                                initial="hidden"
+                                animate="show"
+                                variants={fadeUp}
+                                custom={2}
+                            >
+                                PureSpace delivers consistent, professional cleaning for offices and commercial environments.
+                                Clear scope. Reliable schedules. Quality you can feel when clients walk in.
+                            </motion.p>
+
+                            <motion.div
+                                className="mt-8 flex flex-col sm:flex-row gap-3"
+                                initial="hidden"
+                                animate="show"
+                                variants={fadeUp}
+                                custom={3}
+                            >
+                                <Link href="/booking" className="btn btn-primary">
+                                    Book a Walkthrough
+                                    <span aria-hidden>→</span>
+                                </Link>
+                                <a href={PHONE_TEL} className="btn btn-outline">
+                                    Call {PHONE_DISPLAY}
+                                </a>
+                                <Link href="/contact" className="btn btn-ghost">
+                                    Request a Proposal
+                                </Link>
+                            </motion.div>
+
+                            {/* Trust row */}
+                            <motion.div
+                                className="mt-10 panel p-6"
+                                initial="hidden"
+                                animate="show"
+                                variants={fadeUp}
+                                custom={4}
+                            >
+                                <div className="grid md:grid-cols-3 gap-6">
+                                    <div>
+                                        <div className="text-sm text-luxury-silver/70">Response</div>
+                                        <div className="mt-1 text-xl font-semibold text-luxury-silver">Fast scheduling</div>
+                                        <div className="mt-1 text-sm text-luxury-silver/60">Walkthroughs and quotes without delays.</div>
+                                    </div>
+                                    <div>
+                                        <div className="text-sm text-luxury-silver/70">Quality</div>
+                                        <div className="mt-1 text-xl font-semibold text-luxury-silver">Checklists + inspections</div>
+                                        <div className="mt-1 text-sm text-luxury-silver/60">Clear standards so results stay consistent.</div>
+                                    </div>
+                                    <div>
+                                        <div className="text-sm text-luxury-silver/70">Coverage</div>
+                                        <div className="mt-1 text-xl font-semibold text-luxury-silver">Office + commercial</div>
+                                        <div className="mt-1 text-sm text-luxury-silver/60">Programs built around your facility.</div>
+                                    </div>
                                 </div>
                             </motion.div>
-                        ))}
-                    </motion.div>
-
-                    {/* CTA Buttons with Magnetic 3D Effect */}
-                    <motion.div
-                        className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-16 preserve-3d"
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.8, delay: 1.5 }}
-                    >
-                        <motion.div
-                            className="preserve-3d"
-                            whileHover={{ scale: 1.05, rotateY: 5 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <Link href="/booking" className="btn btn-primary text-lg px-12 py-6 preserve-3d">
-                                <span className="flex items-center gap-3 preserve-3d">
-                                    Schedule Enterprise Consultation
-                                    <motion.span
-                                        animate={{ x: [0, 8, 0] }}
-                                        transition={{ duration: 1.5, repeat: Infinity }}
-                                        className="preserve-3d"
-                                    >
-                                        →
-                                    </motion.span>
-                                </span>
-                            </Link>
-                        </motion.div>
-
-                        <motion.div
-                            className="preserve-3d"
-                            whileHover={{ scale: 1.05, rotateY: -5 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <Link href="/contact" className="btn btn-outline text-lg px-12 py-6 preserve-3d">
-                                Request Custom Proposal
-                            </Link>
-                        </motion.div>
-                    </motion.div>
-
-                    {/* 3D Scroll Indicator */}
-                    <motion.div
-                        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 preserve-3d cursor-pointer"
-                        animate={{ y: [0, 15, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-                    >
-                        <div className="w-8 h-12 border-2 border-luxury-gold rounded-full flex justify-center preserve-3d">
-                            <motion.div
-                                className="w-1 h-4 bg-luxury-gold rounded-full mt-2 preserve-3d"
-                                animate={{ y: [0, 16, 0] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                            />
                         </div>
-                    </motion.div>
+
+                        {/* Right premium panel */}
+                        <div className="lg:col-span-5">
+                            <motion.div
+                                className="panel p-8"
+                                initial={{ opacity: 0, y: 14 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.55 }}
+                            >
+                                <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                        <div className="text-sm text-luxury-silver/70">Next available</div>
+                                        <div className="mt-1 text-2xl font-semibold text-luxury-silver">
+                                            This week
+                                        </div>
+                                        <div className="mt-2 text-sm text-luxury-silver/60">
+                                            Book a walkthrough and we’ll build a scope that fits your facility.
+                                        </div>
+                                    </div>
+                                    <div className="badge">B2B</div>
+                                </div>
+
+                                <div className="mt-6 hr" />
+
+                                <div className="mt-6 space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-sm text-luxury-silver/70">Office suites</span>
+                                        <span className="text-sm text-luxury-silver/90">Daily / Weekly</span>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-sm text-luxury-silver/70">Buildings</span>
+                                        <span className="text-sm text-luxury-silver/90">Night janitorial</span>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-sm text-luxury-silver/70">Medical spaces</span>
+                                        <span className="text-sm text-luxury-silver/90">Protocol-based</span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-8 flex gap-3">
+                                    <Link href="/booking" className="btn btn-primary w-full">
+                                        Book Now
+                                        <span aria-hidden>→</span>
+                                    </Link>
+                                </div>
+
+                                <div className="mt-4 text-xs text-luxury-silver/55">
+                                    Tip: if you don’t have “500+ clients”, don’t claim it. Luxury buyers notice fast.
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+
+                    {/* “Client logos” placeholder row (premium look) */}
+                    <div className="mt-14">
+                        <div className="text-xs tracking-widest uppercase text-luxury-silver/55">
+                            Trusted by facilities that care about presentation
+                        </div>
+                        <div className="mt-4 grid-logos">
+                            {['Corporate Offices', 'Medical Clinics', 'Property Managers', 'Commercial Buildings'].map((x) => (
+                                <div key={x} className="card px-4 py-3 text-center text-sm text-luxury-silver/70">
+                                    {x}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            {/* Featured Services Section */}
-            <section className="relative py-20 overflow-hidden preserve-3d">
-                <div className="absolute inset-0 bg-luxury-grid opacity-10" />
-                <div className="container relative z-10">
-                    <motion.div
-                        className="text-center mb-16 preserve-3d"
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <h2 className="text-5xl md:text-7xl luxury-heading mb-6 preserve-3d">
-                            Premium <span className="gradient-text">Services</span>
+            {/* SERVICES */}
+            <section className="section">
+                <div className="container">
+                    <div className="max-w-2xl">
+                        <div className="kicker w-fit">Solutions</div>
+                        <h2 className="mt-5 text-3xl md:text-4xl h-title text-luxury-silver">
+                            Commercial services built for consistency.
                         </h2>
-                        <p className="text-xl text-luxury-silver/80 max-w-3xl mx-auto preserve-3d">
-                            Comprehensive cleaning solutions tailored for enterprise clients across all industries
+                        <p className="mt-4 p-lead">
+                            Clean design. Clean scope. Clean execution. Your facility should feel premium every day—not just after a deep clean.
                         </p>
-                    </motion.div>
+                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {services.map((service, index) => (
+                    <div className="mt-10 grid md:grid-cols-3 gap-6">
+                        {services.map((s, i) => (
                             <motion.div
-                                key={service.title}
-                                className="card group preserve-3d cursor-pointer"
-                                initial={{ opacity: 0, y: 50, rotateY: -45 }}
-                                whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-                                transition={{ duration: 0.8, delay: index * 0.2 }}
-                                whileHover={{
-                                    scale: 1.05,
-                                    rotateY: 15,
-                                    y: -10
-                                }}
+                                key={s.title}
+                                className="card p-7"
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true, margin: '-80px' }}
+                                variants={fadeUp}
+                                custom={i}
                             >
-                                <motion.div
-                                    className="text-5xl mb-4 preserve-3d"
-                                    animate={{ rotateY: [0, 360] }}
-                                    transition={{ duration: 6, repeat: Infinity, delay: index * 0.5 }}
-                                >
-                                    {service.icon}
-                                </motion.div>
+                                <div className="text-lg font-semibold text-luxury-silver">{s.title}</div>
+                                <p className="mt-3 text-sm text-luxury-silver/65 leading-relaxed">{s.desc}</p>
 
-                                <h3 className="text-2xl font-bold text-luxury-silver mb-3 preserve-3d">
-                                    {service.title}
-                                </h3>
-
-                                <p className="text-luxury-silver/70 mb-6 preserve-3d">
-                                    {service.description}
-                                </p>
-
-                                <div className="space-y-2 preserve-3d">
-                                    {service.features.map((feature, featureIndex) => (
-                                        <motion.div
-                                            key={feature}
-                                            className="flex items-center gap-2 text-luxury-accent text-sm preserve-3d"
-                                            initial={{ opacity: 0, x: -20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: featureIndex * 0.1 }}
-                                        >
-                                            <motion.span
-                                                animate={{ scale: [1, 1.2, 1] }}
-                                                transition={{ duration: 0.3, delay: featureIndex * 0.1 }}
-                                            >
-                                                ✓
-                                            </motion.span>
-                                            {feature}
-                                        </motion.div>
+                                <ul className="mt-5 space-y-2 text-sm text-luxury-silver/75">
+                                    {s.bullets.map((b) => (
+                                        <li key={b} className="flex gap-2">
+                                            <span className="text-luxury-accent">•</span>
+                                            <span>{b}</span>
+                                        </li>
                                     ))}
-                                </div>
+                                </ul>
 
-                                <motion.div
-                                    className="mt-6 preserve-3d"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <Link
-                                        href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                        className="btn btn-primary w-full text-center preserve-3d"
-                                    >
-                                        Explore Service
+                                <div className="mt-6">
+                                    <Link href={s.href} className="btn btn-outline w-full">
+                                        View details
+                                        <span aria-hidden>→</span>
                                     </Link>
-                                </motion.div>
+                                </div>
                             </motion.div>
                         ))}
                     </div>
 
-                    {/* View All Services Button */}
-                    <motion.div
-                        className="text-center mt-12 preserve-3d"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                    >
-                        <Link href="/services" className="btn btn-outline px-12 py-4 preserve-3d">
-                            View All Services
-                        </Link>
-                    </motion.div>
+                    <div className="mt-12 hr" />
                 </div>
             </section>
 
-            {/* Emergency CTA Section */}
-            <section className="relative py-20 overflow-hidden preserve-3d">
-                <div className="absolute inset-0 bg-gradient-to-r from-red-900/20 to-luxury-darker" />
-                <motion.div
-                    className="absolute inset-0 bg-luxury-dots opacity-30"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                />
+            {/* PROCESS */}
+            <section className="section">
+                <div className="container">
+                    <div className="grid lg:grid-cols-12 gap-10 items-start">
+                        <div className="lg:col-span-5">
+                            <div className="kicker w-fit">How it works</div>
+                            <h2 className="mt-5 text-3xl md:text-4xl h-title text-luxury-silver">
+                                Simple process. Executive results.
+                            </h2>
+                            <p className="mt-4 p-lead">
+                                Luxury isn’t loud. It’s consistent. Here’s how we keep your space looking sharp.
+                            </p>
+                        </div>
 
-                <div className="container relative z-10 text-center preserve-3d">
-                    <motion.div
-                        className="max-w-4xl mx-auto preserve-3d"
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <h2 className="text-4xl md:text-6xl luxury-heading mb-6 preserve-3d">
-                            <span className="text-red-400">24/7 Emergency</span> <span className="gradient-text">Services</span>
-                        </h2>
-                        <p className="text-xl text-luxury-silver/80 mb-8 max-w-2xl mx-auto preserve-3d">
-                            Rapid response for critical cleaning situations. Available anytime, anywhere.
-                        </p>
+                        <div className="lg:col-span-7">
+                            <div className="grid md:grid-cols-2 gap-6">
+                                {process.map((p, i) => (
+                                    <motion.div
+                                        key={p.title}
+                                        className="card p-7"
+                                        initial="hidden"
+                                        whileInView="show"
+                                        viewport={{ once: true, margin: '-80px' }}
+                                        variants={fadeUp}
+                                        custom={i}
+                                    >
+                                        <div className="badge w-fit">0{i + 1}</div>
+                                        <div className="mt-3 text-lg font-semibold text-luxury-silver">{p.title}</div>
+                                        <div className="mt-2 text-sm text-luxury-silver/65 leading-relaxed">{p.desc}</div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
 
-                        <motion.div
-                            className="bg-red-500/10 border border-red-500/30 rounded-2xl p-8 max-w-2xl mx-auto mb-8 preserve-3d"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            whileHover={{ scale: 1.02 }}
-                        >
-                            <h3 className="text-3xl font-bold text-red-400 mb-4 preserve-3d">🚨 Call Now: (555) 123-EMER</h3>
-                            <p className="text-luxury-silver preserve-3d">Immediate response for emergency situations</p>
-                        </motion.div>
-
-                        <motion.div
-                            className="preserve-3d"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <Link href="/emergency-services" className="btn btn-primary px-12 py-4 preserve-3d">
-                                Learn About Emergency Services
-                            </Link>
-                        </motion.div>
-                    </motion.div>
+                    <div className="mt-12 panel p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div>
+                            <div className="text-lg font-semibold text-luxury-silver">Want a walkthrough this week?</div>
+                            <div className="mt-1 text-sm text-luxury-silver/65">
+                                Book now or call and we’ll schedule a site visit.
+                            </div>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                            <Link href="/booking" className="btn btn-primary w-full sm:w-auto">Book Walkthrough</Link>
+                            <a href={PHONE_TEL} className="btn btn-outline w-full sm:w-auto">Call {PHONE_DISPLAY}</a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
