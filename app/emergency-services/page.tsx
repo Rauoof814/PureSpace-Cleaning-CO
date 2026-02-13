@@ -1,3 +1,6 @@
+/**
+ * Emergency Services Page
+ */
 'use client';
 import { motion } from 'framer-motion';
 
