@@ -1,6 +1,9 @@
 // app/api/contact/route.ts
 import { NextResponse } from "next/server";
 
+export const runtime = "edge";
+
+
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbyEtxRgCiwXoitW3Yiw1af-rkbwfNFjVRo66VSC6g3PFruAI5vc0ksaiVsVeTuabxTWbQ/exec";
 
