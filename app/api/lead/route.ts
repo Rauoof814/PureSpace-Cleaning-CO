@@ -4,6 +4,7 @@ import { z } from "zod";
 import { sendOwnerEmail } from "@/lib/email";
 import { supabaseAdmin } from "@/server/supabase";
 
+export const runtime = "edge";
 
 const schema = z.object({
     name: z.string().min(1),
