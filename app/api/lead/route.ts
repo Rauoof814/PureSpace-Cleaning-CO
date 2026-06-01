@@ -1,10 +1,11 @@
-// app/api/lead/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-// import { sendOwnerEmail } from "@/lib/email";
 import { supabaseAdmin } from "@/server/supabase";
 
 export const runtime = "edge";
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyEtxRgCiwXoitW3Yiw1af-rkbwfNFjVRo66VSC6g3PFruAI5vc0ksaiVsVeTuabxTWbQ/exec";
 
 const schema = z.object({
     name: z.string().min(1),
@@ -13,21 +14,36 @@ const schema = z.object({
     message: z.string().optional(),
 });
 
+async function notifyOwner(data: unknown) {
+    try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                type: "lead",
+                submittedAt: new Date().toISOString(),
+                payload: data,
+                notify: {
+                    emailTo: "purespacecowa@gmail.com",
+                    smsTo: "3605230312@tmomail.net",
+                },
+            }),
+        });
+    } catch (e) {
+        console.warn("Lead notification failed:", e);
+    }
+}
+
 export async function POST(req: NextRequest) {
     const data = await req.json().catch(() => ({}));
     const parsed = schema.safeParse(data);
 
     if (!parsed.success) {
-        return NextResponse.json(
-            { error: parsed.error.flatten() },
-            { status: 400 }
-        );
+        return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
     }
 
-    // Always notify owner
-    // await sendOwnerEmail("New Lead", `<pre>${JSON.stringify(parsed.data, null, 2)}</pre>`);
+    await notifyOwner(parsed.data);
 
-    // Only touch Supabase when BOTH env vars exist (otherwise skip cleanly)
     const hasSupabase =
         !!process.env.SUPABASE_URL && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
 

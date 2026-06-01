@@ -141,21 +141,42 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/server/supabase";
 import { bookingSchema } from "@/lib/validators";
-// import { sendOwnerEmail } from "@/lib/email";
 
 export const runtime = "edge";
 
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyEtxRgCiwXoitW3Yiw1af-rkbwfNFjVRo66VSC6g3PFruAI5vc0ksaiVsVeTuabxTWbQ/exec";
+
+async function notifyOwner(data: unknown) {
+    try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                type: "booking",
+                submittedAt: new Date().toISOString(),
+                payload: data,
+                notify: {
+                    emailTo: "purespacecowa@gmail.com",
+                    smsTo: "3605230312@tmomail.net",
+                },
+            }),
+        });
+    } catch (e) {
+        console.warn("Booking notification failed:", e);
+    }
+}
+
 export async function POST(req: NextRequest) {
-    // 1) Read body safely
     const data = await req.json().catch(() => ({}));
 
-    // 2) Validate
     const parsed = bookingSchema.safeParse(data);
     if (!parsed.success) {
         return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
     }
 
-    // 3) Try Supabase if available (but DO NOT crash build if missing)
+    await notifyOwner(parsed.data);
+
     if (supabaseAdmin) {
         try {
             const fullName = `${parsed.data.firstName} ${parsed.data.lastName}`.trim();
@@ -187,28 +208,18 @@ export async function POST(req: NextRequest) {
 
             const startISO = new Date(`${parsed.data.date}T${parsed.data.time}:00`).toISOString();
 
-            const { error: bookingErr } = await supabaseAdmin
-                .from("bookings")
-                .insert({
-                    lead_id: lead!.id,
-                    start_time: startISO,
-                    status: "hold",
-                    notes: parsed.data.notes ?? null,
-                });
+            const { error: bookingErr } = await supabaseAdmin.from("bookings").insert({
+                lead_id: lead!.id,
+                start_time: startISO,
+                status: "hold",
+                notes: parsed.data.notes ?? null,
+            });
 
             if (bookingErr) throw bookingErr;
         } catch (e) {
             console.warn("Supabase insert skipped because of error:", e);
         }
-    } else {
-        console.warn("Supabase skipped: missing SUPABASE env vars (supabaseAdmin is null).");
     }
-
-    // 4) Always email owner (works even if Supabase is skipped)
-    // await sendOwnerEmail(
-    //     "New Booking Request (Hold Placed)",
-    //     `<pre>${JSON.stringify(parsed.data, null, 2)}</pre>`
-    // );
 
     return NextResponse.json({ ok: true });
 }
