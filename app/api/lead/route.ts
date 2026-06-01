@@ -1,7 +1,7 @@
 // app/api/lead/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { sendOwnerEmail } from "@/lib/email";
+// import { sendOwnerEmail } from "@/lib/email";
 import { supabaseAdmin } from "@/server/supabase";
 
 export const runtime = "edge";
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Always notify owner
-    await sendOwnerEmail("New Lead", `<pre>${JSON.stringify(parsed.data, null, 2)}</pre>`);
+    // await sendOwnerEmail("New Lead", `<pre>${JSON.stringify(parsed.data, null, 2)}</pre>`);
 
     // Only touch Supabase when BOTH env vars exist (otherwise skip cleanly)
     const hasSupabase =

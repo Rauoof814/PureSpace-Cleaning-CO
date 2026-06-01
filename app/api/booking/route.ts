@@ -141,7 +141,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/server/supabase";
 import { bookingSchema } from "@/lib/validators";
-import { sendOwnerEmail } from "@/lib/email";
+// import { sendOwnerEmail } from "@/lib/email";
 
 export const runtime = "edge";
 
@@ -205,10 +205,10 @@ export async function POST(req: NextRequest) {
     }
 
     // 4) Always email owner (works even if Supabase is skipped)
-    await sendOwnerEmail(
-        "New Booking Request (Hold Placed)",
-        `<pre>${JSON.stringify(parsed.data, null, 2)}</pre>`
-    );
+    // await sendOwnerEmail(
+    //     "New Booking Request (Hold Placed)",
+    //     `<pre>${JSON.stringify(parsed.data, null, 2)}</pre>`
+    // );
 
     return NextResponse.json({ ok: true });
 }
