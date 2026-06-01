@@ -18,7 +18,12 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'PureSpace Commercial Solutions',
         description: 'Enterprise-grade cleaning services'
-    }
+    },
+    icons: {
+        icon: "/logo_1.png",
+        shortcut: "/logo_1.png",
+        apple: "/logo_1.png",
+    },
 };
 
 export default function RootLayout({
