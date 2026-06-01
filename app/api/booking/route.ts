@@ -143,8 +143,6 @@ import { supabaseAdmin } from "@/server/supabase";
 import { bookingSchema } from "@/lib/validators";
 import { sendOwnerEmail } from "@/lib/email";
 
-export const runtime = "edge";
-
 export async function POST(req: NextRequest) {
     // 1) Read body safely
     const data = await req.json().catch(() => ({}));
